@@ -6,23 +6,80 @@
   <script id="challenge">
     // 👉 CHALLENGE 1
     function profileActivation(profile, reason) {
+      let result;
+      if (profile.active === true) {
+        if (!reason) {
+          result = "confirm status manually";
+        } else {
+        profile.active = false;
+        profile.reason = reason;
+        result = profile;
+      }
+     } else if (profile.active === false) {
+        profile.active = true;
+        delete profile.reason;
+        result = profile;
 
     }
+
+    return result 
+  }
+      
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
-
-    }
+       if ((x < 1 || x > 3) || (y < 1 || y > 3)) {
+        return "invalid coordinates"
+    } 
+    if (grid[y-1][x-1] === '🟥') return "🟥 💀"
+    if (grid[y-1][x-1] === "🟦" ) return "🟦 🥳"
+  }
+    
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
+      for (let prop in obj){
+        if (prop.length > 9){
+          return "shorten all prop names to 9 chars or less"
+        } else if (obj[prop] === 0){
+          obj[prop] = false
+        } else if (obj[prop] === 1){
+          obj[prop] = true
+        } else if (obj[prop] === null){
+          delete obj[prop]
+        }
+      }
+        return obj
+      }
+      
 
-    }
+    
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
+      let textArr = text.split(" ");
+      let newText = [];
 
-    }
+      if (forbidden.length === 0){
+        return text;
+      }else{
+        for (let i = 0; i < textArr.length; i++){
+          for (let j = 0; j < forbidden.length; j++){
+            if (textArr[i] === forbidden[j]){
+              let str = textArr[i];
+              let newStr = "";
+              for (let i = 0; i < str.length; i++){
+                newStr += "x";
+              }
+              textArr[i] = newStr; 
+            }
+            }
+            newText.push(textArr[i]);
+          }
+        }
+        return newText.join(' ');
+      }
+      
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
